@@ -1,0 +1,31 @@
+body {
+    margin: 2% 1%;
+
+    width: 96%;
+    height: 98%;
+
+    box-sizing: border-box;
+
+    background-color: #000;
+    color: whitesmoke;
+
+
+    font-family: sans-serif;
+
+    padding-top: 15px; 
+    -webkit-app-region: drag;
+}
+
+#panels {
+    height: 80%;
+}
+
+#output {
+    height: 20%;
+}
+
+label#path {
+    word-wrap: break-word;
+    font-size: 0.7em;
+    color: gray;
+}

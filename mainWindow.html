@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>UnPAKer</title>
 
+    <link rel="stylesheet" href="style.css">
+
     <script>
         const {ipcRenderer} = require("electron");
         const {dialog} = require("electron").remote;
@@ -11,33 +13,16 @@
         window.$ = window.jQuery = require("jquery");
     </script>
 </head>
-<body style="padding-top: 20px; -webkit-app-region: drag;">
-    <select id="mode">
-        <option id="pak">Pak</option>
+<body>
+    <select id="panel-select">
         <option id="unpak">UnPak</option>
+        <option id="pak">Pak</option>
         <option id="configure">Settings</option>
     </select>
 
     <div id="panels">
-        <form id="pak">
-            <h1>Pak an assets folder...</h1>
-            <div class="open-folder" id="src">
-                <label>Source Folder</label>
-                <button >Select</button>
-                <label id="path"></label>
-            </div>
-            <div class="open-file" id="exp">
-                <label>Destination .pak</label>
-                <button >Select</button>
-                <label id="path"></label>
-            </div>
-            <button type="submit">Go!</button>
-
-        </form>
-
-
         <form id="unpak">
-            <h1>Unpak a .pak file</h1>
+            <h1>Unpack a .pak file</h1>
             <div>
                 <div class="open-file" id="src">
                     <label>Source .pak</label>
@@ -54,10 +39,26 @@
 
         </form>
 
+        <form id="pak">
+            <h1>Pack an assets folder...</h1>
+            <div class="open-folder" id="src">
+                <label>Source Folder</label>
+                <button >Select</button>
+                <label id="path"></label>
+            </div>
+            <div class="open-file" id="exp">
+                <label>Destination .pak</label>
+                <button >Select</button>
+                <label id="path"></label>
+            </div>
+            <button type="submit">Go!</button>
+
+        </form>
+
         <form id="configure">
             <h1>Configure settings</h1>
 
-            <div class="left">
+            <div>
                 <div class="open-file" id="pakBin">
                     <label>"asset_packer" executable</label>
                     <button >Select</button>
@@ -69,9 +70,11 @@
                     <label id="path"></label>
                 </div>
             </div>
+            <button type="submit">Save</button>
+            <button id="reset">Reset</button>
+            <br><br><br><br>
 
-            <div class="right">
-                <!-- TODO: move me to the right-->
+            <div>
 
                 Starbound .pak asset packer and unpacker tool, made by OBAN (Ibraheem Rodrigues).<br>
                 All code/non-image files are distributed under the MIT license (https://opensource.org/licenses/MIT). All images belong to Chucklefish.<br>
@@ -79,8 +82,7 @@
                 Please donate that sweet garlic: GacWBGqzawm61FZdbTu2EbSSMKRC8i6QnZ
             </div>
 
-            <button type="submit">Save</button>
-            <button id="reset">Reset</button>
+
         </form>
     </div>
     <div id="output">
@@ -91,13 +93,13 @@
 
 
         // Change which form is visible when select element is used
-        $("#mode").change(() => {
-            $("#mode option:selected").each(function() {
+        $("#panel-select").change(() => {
+            $("#panel-select option:selected").each(function() {
                 $("form").hide();
                 $(`form#${this.id}`).show();
             });
         });
-        $("#mode").change() // Update to show the first item in the list
+        $("#panel-select").change() // Update to show the first item in the list
 
         // Bind form submit handlers
         $("form#pak button[type=submit]").click( (e) => {
@@ -128,6 +130,16 @@
         ipcRenderer.on("bins", (e, pakBin, unpakBin) => {
             $("form#configure #pakBin.open-file #path").html(pakBin);
             $("form#configure #unpakBin.open-file #path").html(unpakBin);
+        })
+
+        // Listen for signal lock buttons, while packing/unpacking
+        ipcRenderer.on("lock", (e, pakBin, unpakBin) => {
+            $("button").prop('disabled', true);
+        })
+
+        // Listen for signal to unlockbuttond buttons
+        ipcRenderer.on("unlock", (e, pakBin, unpakBin) => {
+            $("button").prop('disabled', false);
         })
 
         // Bind folder and .pak dialogs
