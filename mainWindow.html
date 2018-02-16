@@ -59,12 +59,12 @@
 
             <div class="left">
                 <div class="open-file" id="pakBin">
-                    <label>"asset_unpacker" executable</label>
+                    <label>"asset_packer" executable</label>
                     <button >Select</button>
                     <label id="path"></label>
                 </div>
                 <div class="open-file" id="unpakBin">
-                    <label>"asset_packer" executable</label>
+                    <label>"asset_unpacker" executable</label>
                     <button >Select</button>
                     <label id="path"></label>
                 </div>
@@ -80,6 +80,7 @@
             </div>
 
             <button type="submit">Save</button>
+            <button id="reset">Reset</button>
         </form>
     </div>
     <div id="output">
@@ -108,15 +109,25 @@
             return false;
         });
         $("form#configure button[type=submit]").click( (e) => {
-            ipcRenderer.send("configure", $("form#configure #pakBin.open-file #path").html(), $("form#configure #pakBin.open-file #path").html());
+            ipcRenderer.send("configure", $("form#configure #pakBin.open-file #path").html(), $("form#configure #unpakBin.open-file #path").html());
+            return false;
+        });
+        $("form#configure button#reset").click( (e) => {
+            ipcRenderer.send("reset");
             return false;
         });
 
-        //Listen for output messages
+        //Listen for messages
         ipcRenderer.on("message", (e, type, message) => {
             $("#output").html(message);
             $("#output").removeClass();
             $("#output").addClass(type);
+        })
+
+        //Listen for pak locations
+        ipcRenderer.on("bins", (e, pakBin, unpakBin) => {
+            $("form#configure #pakBin.open-file #path").html(pakBin);
+            $("form#configure #unpakBin.open-file #path").html(unpakBin);
         })
 
         // Bind folder and .pak dialogs
