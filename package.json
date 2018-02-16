@@ -1,0 +1,17 @@
+{
+  "name": "unpaker",
+  "version": "1.0.0",
+  "description": "Pack and unpack starbound's .pak files",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "OBAN (Ibraheem Rodrigues)",
+  "license": "MIT (SEE FILE 'LICENSE')",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "electron-json-storage": "^4.0.2",
+    "electron-store": "^1.3.0",
+    "jquery": "^3.3.1"
+  }
+}
