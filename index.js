@@ -78,7 +78,7 @@ app.on("ready", () => {
     // Create window
     mainWindow = new BrowserWindow({
         title: "PAKit",
-        width: 800,
+        width: 700,
         height: 380,
         useContentSize: true,
         resizable: false,
@@ -86,8 +86,8 @@ app.on("ready", () => {
         fullscreen: false,
         fullscreenable: false,
         autoHideMenuBar: true,
-        titleBarStyle: "hiddenInset"
-        // TODO: add icon
+        titleBarStyle: "hiddenInset",
+        // TODO: add windows icon
     });
 
     // Prevent zoom
@@ -112,7 +112,7 @@ app.on("ready", () => {
 
     // Load html into window
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, "mainWindow.html"),
+        pathname: path.join(__dirname, "mainWindow/mainWindow.html"),
         protocol: "file:",
         slashes: true
     }))

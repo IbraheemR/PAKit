@@ -1,0 +1,212 @@
+@font-face {
+    font-family: Hobo;
+    src: url(assets/hobo.ttf);
+    }
+
+* {
+    box-sizing: border-box;
+
+    font-family: Hobo, "Courier New", Courier, monospace;
+    text-rendering: geometricPrecision;
+    color: white;
+
+    cursor: default;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    
+    width: 100vw;
+    height: 100vh;
+
+    overflow-x: hidden;
+
+    background-color: #111;
+}
+
+body > * {
+    width: 100vw;
+}
+
+/* General elements styling */
+
+h1 {
+    margin: 5px 10px;
+    font-weight: normal;
+}
+
+.button {
+    margin: 0;
+    padding: 4px 6px;
+
+    display: inline-block;
+    background-color: #333;
+    border-radius: 3px;
+
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #444;
+}
+
+.button.diabled {
+    background-color: #111;
+    cursor: not-allowed;
+}
+
+#form-buttons {
+    margin: 0 50px;
+
+    width: 200px;
+
+    float: right;
+
+    text-align: center;
+}
+
+#form-buttons .button {
+    margin: 3px 0;
+    padding: 5px 15px;
+    font-size: 2rem;
+}
+
+.open-file, .open-folder {
+    float: left;
+
+    margin: 0 20px;
+    padding: 10px;
+
+    width: 150px;
+    height: 150px;
+
+    border-radius: 5px;
+    background-color: #222;
+
+    text-align: center;
+}
+
+.open-file #name, .open-folder #name {
+    display: block;
+}
+
+.open-file #path, .open-folder #path {
+    margin-top: 5px;
+
+    height: 80px;
+
+    display: block;
+    overflow: hidden;
+
+    color: #444;
+    font-size: 0.7rem;
+
+    word-wrap: break-word;
+}
+
+/* Layout elements styling */
+
+#title {
+    width: 100vw;
+    height: 15vh;
+
+    padding: 5px 25%;
+    font-size: 3rem;
+
+    -webkit-app-region: drag;
+}
+
+#title span {
+    font-size: 1rem;
+}
+
+
+#tabs {
+    width: 100vw;
+    height: 10vh;
+}
+
+.tab {
+    width: 25%;
+    height: 100%;
+
+    float: left;
+
+    text-align: center;
+    line-height: 10vh;
+
+    cursor: pointer;
+
+    border: 1px solid #222;
+}
+
+.tab.active {
+    border-bottom: 3px solid #333;
+}
+
+
+#panels {
+    height: 60vh;
+
+    padding: 10px;
+}
+
+.panel {
+    width: 100%;
+    height: 100%;
+}
+
+
+#output {
+    width: 80vw; /*Extend till we reach the penguins*/
+    height: 15vh;
+
+    padding: 10px 70px 10px 10px;
+
+
+    border-top: 1px solid #333;
+}
+
+#output.error {
+    color: red;
+}
+
+
+#images>* {
+    image-rendering: pixelated;
+    z-index: 100;
+    position: fixed;
+}
+
+#images #crateshort {
+    bottom: 0;
+    right: 0;
+}
+
+#images #crate {
+    bottom: 48px;
+    right: 18px;
+}
+
+#images #penguins {
+    z-index: 150;
+    bottom: 0;
+    right: 54px;
+}
+
+
+/* Code below is from this wonderful codepen: https://codepen.io/simurai/pen/tukwj */
+#frame {
+    width: 156px;
+    height: 141px;
+    border: 0px solid transparent;
+    background: url(assets/upgrading.png) no-repeat left top;
+    background-size: 2340px 141px;
+    animation: frame-animation 1.5s steps(15) infinite;    
+}
+
+@keyframes frame-animation {
+    0% { background-position: 0px 0; }
+    100% { background-position: -2340px 0; }
+ }

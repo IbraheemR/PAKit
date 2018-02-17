@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PAKit</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        const {ipcRenderer} = require("electron");
+        const {dialog} = require("electron").remote;
+
+        window.$ = window.jQuery = require("jquery");
+    </script>
+</head>
+<body>
+    <div id="title">PAKit<span> by OBAN</span></div>
+    <div id="tabs">
+        <div id="pack" class="tab">Pack</div>
+        <div id="unpack" class="tab">Unpack</div>
+        <div id="settings" class="tab">Settings</div>
+        <div id="about" class="tab">About</div>
+    </div>
+
+    <div id="panels">
+        <form id="pack" class="panel">
+            <h1>Pack an asset folder...</h1>
+            <div class="open-folder" id="src">
+                <label id="name">Source Folder</label>
+                <span class="button" >Select</span>
+                <label id="path"></label>
+            </div>
+            <div class="open-file" id="exp">
+                <label id="name">Destination .pak</label>
+                <span class="button" >Select</span>
+                <label id="path"></label>
+            </div>
+            <div id="form-buttons">
+                <span class="button" id="submit">Pack</span>
+            </div>
+
+        </form>
+
+        <form id="unpack" class="panel">
+            <h1>Unpack a .pak file</h1>
+            <div>
+                <div class="open-file" id="src">
+                    <label id="name">Source .pak</label>
+                    <span class="button" >Select</span>
+                    <label id="path"></label>
+                </div>
+                <div class="open-folder" id="exp">
+                    <label id="name">Destination Folder</label>
+                    <span class="button" >Select</span>
+                    <label id="path"></label>
+                </div>
+            </div>
+            <div id="form-buttons">
+                <span class="button" id="submit">Unpack</span>
+            </div>
+
+        </form>
+
+        <form id="settings" class="panel">
+            <h1>Configure settings</h1>
+
+            <div class="open-file" id="pakBin">
+                <label id="name">asset_packer executable</label>
+                <span class="button" >Select</span>
+                <label id="path"></label>
+            </div>
+            <div class="open-file" id="unpakBin">
+                <label id="name">asset_unpacker executable</label>
+                <span class="button" >Select</span>
+                <label id="path"></label>
+            </div>
+            <div id="form-buttons">
+                <span class="button" id="submit">Save</span>
+                <span class="button" id="reset">Reset</span>
+            </div>
+
+        </form>
+        <div id="about" class="panel">
+
+            PAKit, a Starbound .pak asset packer and unpacker tool, made by OBAN (Ibraheem Rodrigues).<br>
+            <br>
+            It works by locating the asset_packer and asset_unpacker executables in your game files (or you can manually select them if they are not found).<br>
+            <br>
+            Find the source files here: https://github.com/IbraheemRodrigues/PAKit<br>
+            All code (i.e everything but images and fonts) is distributed under the MIT license (https://opensource.org/licenses/MIT). <br>
+            All images and the "hobo.ttf" font belong to Chucklefish.<br>
+            <br>
+            Could you spare a clove or two of garlic?<br>
+            GacWBGqzawm61FZdbTu2EbSSMKRC8i6QnZ
+        </div>
+    </div>
+    <div id="output">
+    </div>
+
+    <div id="images">
+        <img id="crateshort" src="assets/outpostcargocrateshort.png" alt="" width="120" height="48">
+        <img id="crate" src="assets/outpostcargocrate.png" alt="" width="96" height="72">
+
+        <div id="penguins">
+            <div id="frame"></div>
+        </div>
+    </div>
+
+
+    <script src="main.js"></script>
+</body>
+</html>
