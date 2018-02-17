@@ -1,4 +1,4 @@
-# unPAKer
+# PAKit
 A tool to pack and unpack Starbound's .pak file format
 
 
