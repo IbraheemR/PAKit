@@ -77,7 +77,7 @@ let mainWindow;
 app.on("ready", () => {
     // Create window
     mainWindow = new BrowserWindow({
-        title: "UnPAKer",
+        title: "PAKit",
         width: 800,
         height: 380,
         useContentSize: true,

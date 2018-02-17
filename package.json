@@ -1,5 +1,5 @@
 {
-  "name": "unpaker",
+  "name": "PAKit",
   "version": "1.0.0",
   "description": "Pack and unpack starbound's .pak files",
   "main": "index.js",
