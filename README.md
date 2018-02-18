@@ -15,11 +15,9 @@ If PAKit fails to find the `asset_packer` and `asset_unpacker` executables in th
 ### First, locate your game files
 Open up your Steam library, right click Starbound and select 'Properties'. Go to the 'LOCAL FILES' tab, and press 'BROWSE LOCAL FILES...'
 
-### Then open your executables folder, the files should be there
-Windows: `win32` / `win64`
-
-Mac: `osx`
-
+### Then open your executables folder(see below), the files should be there
+Windows: `win32` / `win64`  
+Mac: `osx`  
 Linux: `linux32` / `linux64`
 
 ### Copy the path to these files, and paste it into PAKit when you try to locate your executables and then select the executables
