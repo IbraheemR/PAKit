@@ -2,6 +2,7 @@ const electron = require("electron");
 const url = require("url");
 const path = require("path");
 const fs = require("fs");
+const child = require('child_process').execFile;
 const Store = require('electron-store');
 const store = new Store();
 
@@ -182,8 +183,35 @@ function attemptExecLocation(packExec, unpackExec, noOutput, successMessage) {
 
 // Catch messages from render process
 ipcMain.on("dopack", (e, workingFolder, workingPack) => {
-    mainWindow.webContents.send("message", 'info', `Recieved dopack: ${workingFolder}, ${workingPack}`);
+    mainWindow.webContents.send("lock");
+    
+    mainWindow.webContents.send("message", 'info', `Packing ${workingFolder} into ${workingPack}...`);
+    child(store.get("packExec"), [workingFolder, workingPack], (error, stdout) =>{
+        if(error) {
+            mainWindow.webContents.send("message", 'error', "Packing failed! Please ensure all paths and files are valid (You may have to set the executables in the settings tab).");
+            console.log(error);
+        } else {
+            mainWindow.webContents.send("message", 'info', stdout);
+        }
+        mainWindow.webContents.send("unlock");
+    });
 });
+
+ipcMain.on("dounpack", (e, workingPack, workingFolder) => {
+    mainWindow.webContents.send("lock");
+    
+    mainWindow.webContents.send("message", 'info', `Unpacking ${workingPack} into ${workingFolder}...`);
+    child(store.get("unpackExec"), [workingPack, workingFolder], (error, stdout) =>{
+        if(error) {
+            mainWindow.webContents.send("message", 'error', "Unpacking failed! Please ensure all paths and files are valid (You may have to set the executables in the settings tab).");
+            console.log(error);
+        } else {
+            mainWindow.webContents.send("message", 'info', stdout);
+        }
+        mainWindow.webContents.send("unlock");
+    });
+});
+
 ipcMain.on("dounpack", (e, workingPack, workingFolder) => {
     mainWindow.webContents.send("message", 'info', `Recieved dounpack: ${workingPack}, ${workingFolder}`);
 });

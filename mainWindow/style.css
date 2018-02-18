@@ -88,7 +88,7 @@ h1 {
     font-size: 2rem;
 }
 
-.open-file, .open-folder {
+.open-file, .save-file, .open-folder{
     float: left;
 
     margin: 0 20px;
@@ -103,11 +103,11 @@ h1 {
     text-align: center;
 }
 
-.open-file #name, .open-folder #name {
+.open-file #name, .save-file #name, .open-folder #name {
     display: block;
 }
 
-.open-file #path, .open-folder #path {
+.open-file #path, .save-file #path, .open-folder #path {
     margin-top: 5px;
 
     height: 80px;

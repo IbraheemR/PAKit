@@ -28,15 +28,15 @@ $(".tab#unpack").addClass("active");
 
 // Bind button press handlers
 $("form#pack .button#submit").click( (e) => {
-    ipcRenderer.send("dopack", $("form#pack #src.open-folder #path").html(), $("form#pack #exp.open-file #path").html());
+    ipcRenderer.send("dopack", $("form#pack #src #path").html(), $("form#pack #exp #path").html());
     return false;
 });
 $("form#unpack .button#submit").click( (e) => {
-    ipcRenderer.send("dounpack", $("form#unpack #src.open-file #path").html(), $("form#unpack #exp.open-folder #path").html());
+    ipcRenderer.send("dounpack", $("form#unpack #src #path").html(), $("form#unpack #exp #path").html());
     return false;
 });
 $("form#settings .button#submit").click( (e) => {
-    ipcRenderer.send("configure", $("form#settings #packExec.open-file #path").html(), $("form#settings #unpackExec.open-file #path").html());
+    ipcRenderer.send("configure", $("form#settings #packExec #path").html(), $("form#settings #unpackExec #path").html());
     return false;
 });
 $("form#settings .button#reset").click( (e) => {
@@ -44,15 +44,14 @@ $("form#settings .button#reset").click( (e) => {
     return false;
 });
 
-// Bind folder and file open interfaces
-$(".open-folder span").click(function() {
+// Bind file and folder open/save interfaces
+$(".open-file .button").click(function() {
     dialog.showOpenDialog(
         {
-            title: "Open Folder",
+            title: "Open .pak",
             properties: [ 
-                "openDirectory", 
-                "createDirectory", 
-                "promptToCreate" 
+                "openFile", 
+                "createDirectory"
             ],
         },
         (paths) => {
@@ -63,13 +62,27 @@ $(".open-folder span").click(function() {
     );
 });
 
-$(".open-file span").click(function() {
+$(".save-file .button").click(function() {
+    dialog.showSaveDialog(
+        {
+            title: "Save .pak"
+        },
+        (path) => {
+            if (path) {
+                $(this).parent().children("#path").html(path);
+            }
+        }
+    );
+});
+
+$(".open-folder .button").click(function() {
     dialog.showOpenDialog(
         {
-            title: "Open .pak",
+            title: "Open Folder",
             properties: [ 
-                "openFile", 
-                "createDirectory"
+                "openDirectory", 
+                "createDirectory", 
+                "promptToCreate" 
             ],
         },
         (paths) => {
