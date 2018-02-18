@@ -123,7 +123,7 @@ switch(process.platform) {
         basePath += "/Library/Application Support/Steam/steamapps/common/Starbound/osx/";
         break;
     case "linux":
-        basePath += "/.local/share/Steam/SteamApps/common/Starbound/linux32";
+        basePath += "/.steam/steam/steamspps/common/Starbound/linux";
         break;
 }
 
@@ -134,12 +134,12 @@ switch(process.platform) {
 function attemptExecLocation(packExec, unpackExec, noOutput, successMessage) {
     let errors = ""
     // check packExec
-    if (fs.existsSync(packExec)) {
+    if (fs.existsSync(packExec || " ")) {
         mainWindow.webContents.send("packExec", packExec);
         store.set("packExec", packExec);
     } else { // try base path
         packExec = basePath + "asset_packer" + (process.platform == "win32" ? ".exe" : "")
-        if (fs.existsSync(packExec)) {
+        if (fs.existsSync(packExec || " ")) {
             store.set("packExec", packExec);
             mainWindow.webContents.send("packExec", packExec);
 
@@ -151,12 +151,12 @@ function attemptExecLocation(packExec, unpackExec, noOutput, successMessage) {
     }
 
     // check unpackExec
-    if (fs.existsSync(unpackExec)) {
+    if (fs.existsSync(unpackExec || " ")) {
         mainWindow.webContents.send("unpackExec", unpackExec);
         store.set("unpackExec", unpackExec);
     } else { // try base path
         unpackExec = basePath + "asset_unpacker" + (process.platform == "win32" ? ".exe" : "")
-        if (fs.existsSync(unpackExec)) {
+        if (fs.existsSync(unpackExec || " ")) {
             store.set("unpackExec", unpackExec);
             mainWindow.webContents.send("unpackExec", unpackExec);
 
