@@ -66,6 +66,10 @@ $(".save-file .button").click(function() {
     dialog.showSaveDialog(
         {
             title: "Save " + $(this).parent().children("#name").html(),
+            filters: [
+                {name: '.pak File', extensions: ['pak']},
+                {name: 'All Files', extensions: ['*']}
+            ]
         },
         (path) => {
             if (path) {
