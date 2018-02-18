@@ -6,12 +6,6 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <script>
-        const {ipcRenderer} = require("electron");
-        const {dialog} = require("electron").remote;
-
-        window.$ = window.jQuery = require("jquery");
-    </script>
 </head>
 <body>
     <div id="title">PAKit<span> by OBAN</span></div>
@@ -24,7 +18,7 @@
 
     <div id="panels">
         <form id="pack" class="panel">
-            <h1>Pack an asset folder...</h1>
+            <h1>Pack an asset folder</h1>
             <div class="open-folder" id="src">
                 <label id="name">Source Folder</label>
                 <span class="button" >Select</span>
@@ -64,12 +58,12 @@
         <form id="settings" class="panel">
             <h1>Configure settings</h1>
 
-            <div class="open-file" id="pakBin">
+            <div class="open-file" id="packExec">
                 <label id="name">asset_packer executable</label>
                 <span class="button" >Select</span>
                 <label id="path"></label>
             </div>
-            <div class="open-file" id="unpakBin">
+            <div class="open-file" id="unpackExec">
                 <label id="name">asset_unpacker executable</label>
                 <span class="button" >Select</span>
                 <label id="path"></label>
@@ -82,15 +76,15 @@
         </form>
         <div id="about" class="panel">
 
-            PAKit, a Starbound .pak asset packer and unpacker tool, made by OBAN (Ibraheem Rodrigues).<br>
+            PAKit, a Starbound .pak asset packer and unpacker tool, by OBAN (Ibraheem Rodrigues).<br>
             <br>
             It works by locating the asset_packer and asset_unpacker executables in your game files (or you can manually select them if they are not found).<br>
             <br>
-            Find the source files here: https://github.com/IbraheemRodrigues/PAKit<br>
-            All code (i.e everything but images and fonts) is distributed under the MIT license (https://opensource.org/licenses/MIT). <br>
-            All images and the "hobo.ttf" font belong to Chucklefish.<br>
+            Find the source files <a href="https://github.com/IbraheemRodrigues/PAKit">here</a>.<br>
+            All code (i.e everything but images and fonts) is distributed under the <a href="https://opensource.org/licenses/MIT">MIT license</a>. <br>
+            All images and the 'hobo.ttf' font belong to Chucklefish.<br>
             <br>
-            Could you spare a clove or two of garlic?<br>
+            Could you spare a clove or two of <a href="https://garlicoin.io/">Garlic</a>?<br>
             GacWBGqzawm61FZdbTu2EbSSMKRC8i6QnZ
         </div>
     </div>

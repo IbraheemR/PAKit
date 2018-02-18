@@ -1,93 +1,34 @@
 const electron = require("electron");
 const url = require("url");
 const path = require("path");
-const pathExists = require("path-exists");
+const fs = require("fs");
 const Store = require('electron-store');
 const store = new Store();
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
-
-
-let found = false;
-let basePath = process.env.HOME;
-
-//Get base path
-switch(process.platform) {
-    case "win23":
-        basePath = "C:\\Program Files (x86)\\Steam\\SteamApps\\common\\Starbound\\win32\\";
-        break;
-    case "darwin":
-        basePath += "/Library/Application Support/Steam/steamapps/common/Starbound/osx/";
-        break;
-    case "linux":
-        basePath += "/.local/share/Steam/SteamApps/common/Starbound/linux32";
-        break;
-}
-
-// Attempt to load binary dirs
-let pakBin = store.get("pakBin");
-let unpakBin = store.get("unpakBin");
-
-let binError = false;
-
-if (!pakBin) {
-    //Attempt to load pakBin dir from default
-    pakBin = basePath + "asset_packer" + (process.platform == "win32" ? ".exe" : "")
-    pathExists(pakBin).then(exists => {
-        if (!exists) {
-            binError = "pack";
-        }
-    });
-
-} else {
-    pathExists(pakBin).then(exists => {
-        if (!exists) {
-            binError = "pack";
-            store.delete("pakBin");// Delete if invalid path
-        }
-    });
-}
-
-if (!unpakBin) {
-    //Attempt to load unpakBin dir from default
-    unpakBin = basePath + "asset_unpacker" + (process.platform == "win32" ? ".exe" : "")
-    pathExists(unpakBin).then(exists => {
-        if (!exists) {
-            binError += " unpack";
-        }
-    });
-
-} else {
-    pathExists(unpakBin).then(exists => {
-        if (!exists) {
-            binError += " unpack";
-            store.delete("unpakBin"); // Delete if invalid path
-        }
-    });
-}
-
-console.log("bins:", unpakBin, pakBin);
-
-
-
+//
+// Create render process
+//
 
 let mainWindow;
 
 app.on("ready", () => {
     // Create window
     mainWindow = new BrowserWindow({
-        title: "PAKit",
+        title: "PAcKit",
         width: 700,
         height: 380,
+
+        /* Taken from etcher source code (thanks resin.io!)*/
         useContentSize: true,
         resizable: false,
         maximizable: false,
         fullscreen: false,
         fullscreenable: false,
         autoHideMenuBar: true,
+
         titleBarStyle: "hiddenInset",
-        // TODO: add windows icon
     });
 
     // Prevent zoom
@@ -97,16 +38,13 @@ app.on("ready", () => {
       event.preventDefault()
     })
 
-    // Load executable paths or error message
+    // Load executable paths or error message when DOM is ready
     mainWindow.webContents.on("dom-ready", () => {
-        if (binError) {
-            mainWindow.webContents.send("message", 'error', `Could not locate ${binError} executable. Please locate it by going to the settings pannel and seletcing it from your file system.`);
-            console.log("Error on path: ", binError);
-            mainWindow.webContents.send("bins", "", "");
-        } else {
-            console.log("Paths are good!");
-            mainWindow.webContents.send("bins", pakBin, unpakBin);
-        }
+        // Attempt to load binary dirs
+        let packExec = store.get("packExec");
+        let unpackExec = store.get("unpackExec");
+
+        attemptExecLocation(packExec, unpackExec, /*noOutput=*/true, /*successMessage=*/"&zwnj;");
     });
 
 
@@ -127,52 +65,6 @@ app.on("ready", () => {
     Menu.setApplicationMenu(mainMenu);
 });
 
-// Catch messages from render process
-ipcMain.on("dopak", (e, workingFolder, workingPak) => {
-    mainWindow.webContents.send("message", 'info', `Recieved dopak: ${workingFolder}, ${workingPak}`);
-});
-ipcMain.on("dounpak", (e, workingPak, workingFolder) => {
-    mainWindow.webContents.send("message", 'info', `Recieved dounpak: ${workingPak}, ${workingFolder}`);
-});
-
-ipcMain.on("configure", (e, pakBin, unpakBin) => {
-
-    store.set('pakBin', pakBin);
-    store.set('unpakBin', unpakBin);
-
-    mainWindow.webContents.send("message", 'info', `Saved configuration: ${store.get('pakBin')}, ${store.get('unpakBin')}`);
-});
-ipcMain.on("reset", (e, pakBin, unpakBin) => {
-
-    store.delete('pakBin');
-    store.delete('unpakBin');
-
-    binError = "";
-
-    pakBin =  basePath + "asset_packer" + (process.platform == "win32" ? ".exe" : "")
-    pathExists(pakBin).then(exists => {
-        if (!exists) {
-            binError = "pack";
-        }
-    });
-    unpakBin =  basePath + "asset_unpacker" + (process.platform == "win32" ? ".exe" : "")
-    pathExists(unpakBin).then(exists => {
-        if (!exists) {
-            binError += " unpack";
-        }
-    });
-
-    if (binError) {
-        mainWindow.webContents.send("message", 'error', `Could not locate ${binError} executable. Please locate it by going to the settings pannel and seletcing it from your file system.`);
-        console.log("Error on path: ", binError);
-        mainWindow.webContents.send("bins", "", "");
-    } else {
-        mainWindow.webContents.send("message", 'info', "Reset configuration");
-        mainWindow.webContents.send("bins", unpakBin, pakBin);
-    }
-});
-
-
 // Create menu template
 const mainMenuTemplate = [
     {
@@ -180,7 +72,7 @@ const mainMenuTemplate = [
         submenu: [
             {
                 label: "Toggle DevTools",
-                accelerator: "Shift+CmdOrCtrl+I",
+                accelerator: "Alt+CmdOrCtrl+I",
                 click(item, focusedWindow) {
                     focusedWindow.toggleDevTools();
                 }
@@ -211,3 +103,98 @@ const mainMenuTemplate = [
         ]
     }
 ];
+
+
+//
+// Locate executable files
+//
+
+
+let found = false;
+let basePath = process.env.HOME;
+
+//Get base path
+switch(process.platform) {
+    case "win23":
+        basePath = "C:\\Program Files (x86)\\Steam\\SteamApps\\common\\Starbound\\win32\\";
+        break;
+    case "darwin":
+        basePath += "/Library/Application Support/Steam/steamapps/common/Starbound/osx/";
+        break;
+    case "linux":
+        basePath += "/.local/share/Steam/SteamApps/common/Starbound/linux32";
+        break;
+}
+
+//
+// Utility function to verify executable paths
+//
+
+function attemptExecLocation(packExec, unpackExec, noOutput, successMessage) {
+    let errors = ""
+    // check packExec
+    if (fs.existsSync(packExec)) {
+        mainWindow.webContents.send("packExec", packExec);
+        store.set("packExec", packExec);
+    } else { // try base path
+        packExec = basePath + "asset_packer" + (process.platform == "win32" ? ".exe" : "")
+        if (fs.existsSync(packExec)) {
+            store.set("packExec", packExec);
+            mainWindow.webContents.send("packExec", packExec);
+
+            errors += !noOutput ? "Could not load asset_packer executable, using default\n" : "&zwnj;";
+        } else {
+            mainWindow.webContents.send("packExec", "&zwnj;") 
+            errors += "Could not load asset_packer executable, please set it in the settings tab\n";
+        }
+    }
+
+    // check unpackExec
+    if (fs.existsSync(unpackExec)) {
+        mainWindow.webContents.send("unpackExec", unpackExec);
+        store.set("unpackExec", unpackExec);
+    } else { // try base path
+        unpackExec = basePath + "asset_unpacker" + (process.platform == "win32" ? ".exe" : "")
+        if (fs.existsSync(unpackExec)) {
+            store.set("unpackExec", unpackExec);
+            mainWindow.webContents.send("unpackExec", unpackExec);
+
+            errors += !noOutput ? "Could not load asset_unpacker executable, using default\n" : "&zwnj;";
+        } else {
+            mainWindow.webContents.send("unpackExec", "&zwnj;") 
+            errors += "Could not load asset_unpacker executable, please set it in the settings tab\n";
+        }
+    }
+
+
+    if (errors) { // Send error message if needed
+        mainWindow.webContents.send("message", 'error', errors);
+    } else {
+        mainWindow.webContents.send("message", 'info', successMessage || 'Saved configuration!');
+    }
+
+}
+
+
+//
+// Bind IPC messengers and liseners
+//
+
+// Catch messages from render process
+ipcMain.on("dopack", (e, workingFolder, workingPack) => {
+    mainWindow.webContents.send("message", 'info', `Recieved dopack: ${workingFolder}, ${workingPack}`);
+});
+ipcMain.on("dounpack", (e, workingPack, workingFolder) => {
+    mainWindow.webContents.send("message", 'info', `Recieved dounpack: ${workingPack}, ${workingFolder}`);
+});
+
+ipcMain.on("configure", (e, packExec, unpackExec) => {
+    attemptExecLocation(packExec, unpackExec);
+});
+ipcMain.on("reset", (e) => {
+
+    store.delete('packExec');
+    store.delete('unpackExec');
+
+    attemptExecLocation("", "", true, "Reset configuration!");
+});
