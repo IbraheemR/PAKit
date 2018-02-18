@@ -178,6 +178,11 @@ Layout elements styling
     height: 100%;
 }
 
+.panel#settings #info {
+    padding: 5px 0 0 10px; 
+    clear: both;
+}
+
 
 #output {
     width: 77vw; /* Extend till we reach the penguins */
