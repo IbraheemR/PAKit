@@ -1,5 +1,5 @@
 # PAKit
-PAKit, a Starbound .pak asset packer and unpacker tool, by OBAN (Ibraheem Rodrigues).
+A tool to pack and unpack Starbound's .pak file format
 
 It works by locating the asset_packer and asset_unpacker executables in your game files (or you can manually select them if they are not found).
 
