@@ -1,13 +1,13 @@
 @font-face {
     font-family: Hobo;
     src: url(assets/hobo.ttf);
-    }
+}
 
 * {
     box-sizing: border-box;
 
     font-family: Hobo, "Courier New", Courier, monospace;
-    text-rendering: geometricPrecision;
+    text-rendering: geometricPrecision; /* ensure the text is properly pixelated */
     color: white;
 
     cursor: default;
@@ -29,11 +29,27 @@ body > * {
     width: 100vw;
 }
 
-/* General elements styling */
+/*
+
+General elements styling
+
+*/
+
+a {
+    cursor: pointer;
+    color: #33F;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline
+}
+a:visited {
+    color: #33F;
+}
 
 h1 {
     margin: 5px 10px;
-    font-weight: normal;
+    font-weight: normal; /* with boldness the text is fuzzy */
 }
 
 .button {
@@ -105,16 +121,21 @@ h1 {
     word-wrap: break-word;
 }
 
-/* Layout elements styling */
+/*
+
+Layout elements styling
+
+*/
 
 #title {
     width: 100vw;
-    height: 15vh;
+    height: 13vh;
 
     padding: 5px 25%;
-    font-size: 3rem;
+    -webkit-app-region: drag; /* Allow the user to drag the window when clicking this location, on frameless macOS window */
 
-    -webkit-app-region: drag;
+    font-size: 3rem;
+    /* line-height: 13vh; */
 }
 
 #title span {
@@ -159,22 +180,22 @@ h1 {
 
 
 #output {
-    width: 80vw; /*Extend till we reach the penguins*/
-    height: 15vh;
+    width: 77vw; /* Extend till we reach the penguins */
+    height: auto; /* This section can take up the rest of the screen */
 
-    padding: 10px 70px 10px 10px;
-
-
+    padding: 10px 70px 10px 10px; /* 70px ensures the text does not go behind the penguins */
     border-top: 1px solid #333;
+
+    word-wrap: break-word;
 }
 
 #output.error {
-    color: red;
+    color: red; /* if we display an error*/
 }
 
 
 #images>* {
-    image-rendering: pixelated;
+    image-rendering: pixelated; /* Keep pixel art sharp*/
     z-index: 100;
     position: fixed;
 }
@@ -198,15 +219,14 @@ h1 {
 
 /* Code below is from this wonderful codepen: https://codepen.io/simurai/pen/tukwj */
 #frame {
-    width: 156px;
+    width: 156px; /* Dimentions of each frame*/
     height: 141px;
-    border: 0px solid transparent;
-    background: url(assets/upgrading.png) no-repeat left top;
-    background-size: 2340px 141px;
-    animation: frame-animation 1.5s steps(15) infinite;    
+    background: url(assets/upgrading.png) no-repeat left top; /* Load the frame strip */
+    background-size: 2340px 141px; /* Scale up the frame strip */
+    animation: frame-animation 1.5s steps(15) infinite; /* play the animation in steps of 15, so we see each frame*/
 }
 
 @keyframes frame-animation {
     0% { background-position: 0px 0; }
-    100% { background-position: -2340px 0; }
+    100% { background-position: -2340px 0; } /* By the end of the animation shift all frames through the visable region*/
  }
