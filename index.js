@@ -201,7 +201,7 @@ ipcMain.on("dounpack", (e, workingPack, workingFolder) => {
     mainWindow.webContents.send("lock");
     
     mainWindow.webContents.send("message", 'info', `Unpacking ${workingPack} into ${workingFolder}...`);
-    child(store.get("unpackExec"), [workingPack, workingFolder], (error, stdout) =>{
+    child(store.get("unpackExec"), [workingPack, path.join(workingFolder, path.basename(workinPack))], (error, stdout) =>{
         if(error) {
             mainWindow.webContents.send("message", 'error', "Unpacking failed! Please ensure all paths and files are valid (You may have to set the executables in the settings tab).");
             console.log(error);

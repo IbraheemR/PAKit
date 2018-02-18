@@ -48,7 +48,7 @@ $("form#settings .button#reset").click( (e) => {
 $(".open-file .button").click(function() {
     dialog.showOpenDialog(
         {
-            title: "Open .pak",
+            title: "Open " + $(this).parent().children("#name").html(),
             properties: [ 
                 "openFile", 
                 "createDirectory"
@@ -65,7 +65,7 @@ $(".open-file .button").click(function() {
 $(".save-file .button").click(function() {
     dialog.showSaveDialog(
         {
-            title: "Save .pak"
+            title: "Save " + $(this).parent().children("#name").html(),
         },
         (path) => {
             if (path) {
@@ -78,7 +78,7 @@ $(".save-file .button").click(function() {
 $(".open-folder .button").click(function() {
     dialog.showOpenDialog(
         {
-            title: "Open Folder",
+            title: "Open " + $(this).parent().children("#name").html(),
             properties: [ 
                 "openDirectory", 
                 "createDirectory", 
