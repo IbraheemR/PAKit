@@ -210,12 +210,17 @@ Layout elements styling
     right: 18px;
 }
 
+#images #pak {
+    z-index: 150;
+    bottom: 63px;
+    right: 36px;
+}
+
 #images #penguins {
     z-index: 150;
     bottom: 0;
     right: 54px;
 }
-
 
 /* Code below is from this wonderful codepen: https://codepen.io/simurai/pen/tukwj */
 #frame {
