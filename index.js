@@ -17,7 +17,7 @@ let mainWindow;
 app.on("ready", () => {
     // Create window
     mainWindow = new BrowserWindow({
-        title: "PAcKit",
+        title: "PAKit",
         width: 700,
         height: 380,
 
@@ -116,7 +116,7 @@ let basePath = process.env.HOME;
 
 //Get base path
 switch(process.platform) {
-    case "win23":
+    case "win32":
         basePath = "C:\\Program Files (x86)\\Steam\\SteamApps\\common\\Starbound\\win32\\";
         break;
     case "darwin":
@@ -126,7 +126,7 @@ switch(process.platform) {
         basePath += "/.steam/steam/steamspps/common/Starbound/linux";
         break;
 }
-
+console.log(basePath);
 //
 // Utility function to verify executable paths
 //
@@ -139,6 +139,7 @@ function attemptExecLocation(packExec, unpackExec, noOutput, successMessage) {
         store.set("packExec", packExec);
     } else { // try base path
         packExec = basePath + "asset_packer" + (process.platform == "win32" ? ".exe" : "")
+        console.log(packExec);
         if (fs.existsSync(packExec || " ")) {
             store.set("packExec", packExec);
             mainWindow.webContents.send("packExec", packExec);

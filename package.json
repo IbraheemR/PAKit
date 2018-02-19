@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Pack and unpack starbound's .pak files",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IbraheemRodrigues/PAKit.git"
+  },
   "scripts": {
     "start": "electron .",
     "package-mac": "electron-packager . PAKit --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds",
