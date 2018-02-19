@@ -56,6 +56,7 @@ $(".open-file .button").click(function() {
         },
         (paths) => {
             if (paths) {
+    // Allow user to select new path again
                 $(this).parent().children("#path").html(paths[0]);
             }
         }
@@ -115,10 +116,10 @@ ipcRenderer.on("unpackExec", (e, path) => {
 
 // Listen for lock buttons message, while packing/unpacking
 ipcRenderer.on("lock", (e, packExec, unpackExec) => {
-    $("span.button").addClass("disabled")
+    $(".button").css("pointer-events", "none").addClass("disabled");
 })
 
 // Listen for unlock buttons message, when packing/unpacking is finished
 ipcRenderer.on("unlock", (e, packExec, unpackExec) => {
-    $("span.button").removeClass("disabled")
+    $(".button").css("pointer-events", "auto").removeClass("disabled");
 })
