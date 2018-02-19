@@ -213,10 +213,6 @@ ipcMain.on("dounpack", (e, workingPack, workingFolder) => {
     });
 });
 
-ipcMain.on("dounpack", (e, workingPack, workingFolder) => {
-    mainWindow.webContents.send("message", 'info', `Recieved dounpack: ${workingPack}, ${workingFolder}`);
-});
-
 ipcMain.on("configure", (e, packExec, unpackExec) => {
     attemptExecLocation(packExec, unpackExec);
 });
