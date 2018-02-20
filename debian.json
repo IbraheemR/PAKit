@@ -1,10 +1,13 @@
 {
-    "dest": "release-builds/",
-    "icon": "icons/techchest.png",
-    "categories": [
-      "Utility"
-    ],
-    "lintianOverrides": [
-      "changelog-file-missing-in-native-package"
-    ]
-  }
+  "genericName": "PAKit",
+  "homepage": "https://github.com/IbraheemRodrigues/PAKit#pakit",
+  "dest": "release-builds/",
+  "icon": "icons/techchest.png",
+  "categories": [
+    "Utility"
+  ],
+  "lintianOverrides": [
+    "changelog-file-missing-in-native-package"
+  ],
+  "bin": "PAKit"
+}
