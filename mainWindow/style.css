@@ -37,14 +37,14 @@ General elements styling
 
 a {
     cursor: pointer;
-    color: #33F;
-    text-decoration: none;
+    color: white;
+    text-decoration: underline;
 }
-a:hover {
-    text-decoration: underline
+a:hover, a:visited:hover  {
+    color: lightgray;
 }
 a:visited {
-    color: #33F;
+    color: white;
 }
 
 h1 {
@@ -162,7 +162,7 @@ Layout elements styling
     border: 1px solid #222;
 }
 
-.tab.active {
+.tab:hover, .tab.active {
     border-bottom: 3px solid #333;
 }
 
@@ -175,7 +175,7 @@ Layout elements styling
     width: 100%;
     height: 100%;
 
-    padding: 20px 20px 10px 20px;
+    padding: 10px 20px;
 }
 
 .panel#settings #info {
@@ -239,4 +239,4 @@ Layout elements styling
 @keyframes frame-animation {
     0% { background-position: 0px 0; }
     100% { background-position: -2340px 0; } /* By the end of the animation shift all frames through the visable region*/
- }
+}
