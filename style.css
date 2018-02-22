@@ -1,0 +1,107 @@
+#main {
+    display: grid;
+
+    grid-template-areas: 
+    "i1"
+    "t1"
+    "i2"
+    "t2"
+    "t3"
+    "i3";
+}
+
+#main>* {
+    padding: 20px;
+
+    font-size: 1.3rem;
+}
+
+#main h1 {
+    margin: 5px 0;
+}
+
+#penguins {
+    display: block;
+
+    position: relative;
+    margin: 150px auto 0 calc(50% - 105px); /*Near enough to the centre*/
+}
+
+#penguins>* {
+    z-index: 100;
+    position: absolute;
+}
+
+#penguins #crateshort {
+    width: 120px;
+    height: auto;
+
+    bottom: 0;
+    left: 90px;
+}
+
+#penguins #crate {
+    width: 96px;
+    height: auto;
+
+    bottom: 48px;
+    left: 96px;
+}
+
+#penguins #pak {
+    width: 36px;
+    height: auto;
+
+    z-index: 150;
+    bottom: 63px;
+    left: 141px;
+}
+
+#penguins #penguin-animation {
+    z-index: 150;
+    bottom: 0;
+    left: 0;
+}
+
+/* Code below is from this wonderful codepen: https://codepen.io/simurai/pen/tukwj */
+#penguins #penguin-animation #frame {
+    width: 156px; /* Dimentions of each frame*/
+    height: 141px;
+    background: url(assets/upgrading.png) no-repeat left top; /* Load the frame strip */
+    background-size: 2340px 141px; /* Scale up the frame strip */
+    animation: frame-animation 1.5s steps(15) infinite; /* play the animation in steps of 15, so we see each frame*/
+}
+
+@keyframes frame-animation {
+    0% { background-position: 0px 0; }
+    100% { background-position: -2340px 0; } /* By the end of the animation shift all frames through the visable region*/
+}
+
+.image#g2 img {
+    margin: 0 auto;
+    display: block;
+
+    width: 252px;
+    height: auto;
+}
+
+.image#g3 {
+    text-align: center;
+    font-size: 1.6rem;
+}
+
+
+@media only screen and (min-width: 700px) {
+    body {
+        overflow: hidden;
+    }
+
+    #main {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 200px 200px auto;
+        grid-template-areas: 
+        "t1 t1 i1"
+        "i2 t2 t2"
+        "t3 t3 i3";
+    }
+}
