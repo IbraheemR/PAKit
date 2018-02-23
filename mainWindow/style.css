@@ -52,6 +52,10 @@ h1 {
     font-weight: normal; /* with boldness the text is fuzzy */
 }
 
+img {
+    image-rendering: pixelated; /* Keep pixel art sharp*/
+}
+
 .button {
     margin: 0;
     padding: 4px 6px;
@@ -135,7 +139,15 @@ Layout elements styling
     -webkit-app-region: drag; /* Allow the user to drag the window when clicking this location, on frameless macOS window */
 
     font-size: 3rem;
-    /* line-height: 13vh; */
+    line-height: 13vh;
+}
+
+#title img {
+    width: 48px;
+    height: auto;
+
+    position: relative;
+    top: 3px;
 }
 
 #title span {
@@ -200,7 +212,6 @@ Layout elements styling
 
 
 #images>* {
-    image-rendering: pixelated; /* Keep pixel art sharp*/
     z-index: 100;
     position: fixed;
 }
