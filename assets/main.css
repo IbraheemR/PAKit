@@ -34,7 +34,6 @@ General elements styling
 */
 
 a {
-    cursor: pointer;
     color: white;
     text-decoration: underline;
 }
@@ -49,6 +48,16 @@ div, img {
     image-rendering: pixelated; /* Keep pixel art sharp */
 }
 
+a.nolink {
+    text-decoration: none;
+}
+a:hover, a:visited:hover  {
+    color: white;
+}
+a:visited {
+    color: white;
+}
+
 /*
 
 Layout elements styling
@@ -57,16 +66,22 @@ Layout elements styling
 
 #title {
     width: 100%;
-
-    padding: 5px 0 5px 25%;
+    padding: 5px 0 5px 20%;
 
     font-size: 3rem;
+}
+
+#title img {
+    width: 48px;
+    height: auto;
+
+    position: relative;
+    top: 3px;
 }
 
 #title span {
     font-size: 1rem;
 }
-
 
 
 nav {
@@ -121,6 +136,7 @@ nav a:visited {
 
 #main {
     margin: 30px auto;
+    padding: 20px;
 
     width: 100%;
     max-width: 1000px;

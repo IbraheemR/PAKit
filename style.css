@@ -1,6 +1,6 @@
 #main {
     display: grid;
-
+    grid-gap: 40px;
     grid-template-areas: 
     "i1"
     "t1"
@@ -11,8 +11,6 @@
 }
 
 #main>* {
-    padding: 20px;
-
     font-size: 1.3rem;
 }
 
@@ -103,5 +101,8 @@
         "t1 t1 i1"
         "i2 t2 t2"
         "t3 t3 i3";
+    }
+    .image#g3 {
+        text-align: left;
     }
 }
