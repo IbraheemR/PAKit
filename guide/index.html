@@ -20,15 +20,64 @@
         <a href="/PAKit/download">Download</a>
     </nav>
     <div id="main">
-            <h1 id="installation">Installation</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim rem pariatur ducimus earum modi dolorem quis, quas ullam non vero eum ad odio asperiores quasi dolorum itaque eveniet atque labore?</p>
+        <h1 id="installation">Installation &amp; Updating</h1>
+        <h2 id="install-win">Windows</h2>
+        <ol>
+            <li>Download and run the latest installer from the <a href="/PAKit/download/" target="_blank">download page</a>.</li>
+            <li>If you are updating, the installer will handle replacing old files for you.</li>
+            <li>You may recieve antivirus warning messages. You can ignore these, PAKit is virus free.<br> If you are super concerned about security, you can clone the repository and build from source (see <a href="#install-source">below</a>).</li>
+        </ol>
+
+
+        <h2 id="install-mac">MacOS</h2>
+        <ol>
+            <li>Download the latest .dmg package from the <a href="/PAKit/download/" target="_blank">download page</a>.</li>
+            <li>Double click the .dmg to open it.</li>
+            <li>Drag the <code>PAKit</code> app to you applications folder.</li>
+            <li>If you are upgrading, simply replace the old app file.</li>
+        </ol>
+
+        <h2 id="install-linux">Linux (Ubuntu/Debian)</h2>
+        <ol>
+            <li>Download the latest .deb package from the <a href="/PAKit/download/" target="_blank">download page</a>.</li>
+            <li>Double click the .deb to open it in your package manager.</li>
+            <li>Press <code>Install</code>. You may have to type in your password.</li>
+            <li>If you are upgrading, the new files should overwrite the old ones.</li>
+        </ol>
+        <h2 id="install-source">Building from source</h2>
+        <p>Requires familiarity with git</p>
+        <ol>
+            <li>Ensure you have <a href="https://git-scm.com/downloads" target="_blank">git</a> and <a href="https://nodejs.org/en/download/" target="_blank">npm/node.js</a> installed</li>
+            <li>Clone the <a href="https://github.com/OBANx/PAKit" target="_blank">repository</a> (use the 'master' branch)</li>
+            <li>Inside the downloaded folder run the command <code>npm run package-&lt;platform&gt;</code> to build from source, where <code>&lt;platform&gt;</code> is either <code>win</code>, <code>mac</code> or <code>linux</code>.</li>
+            <li>Your build will be output to the <code>release-builds/</code> folder.</li>
+            <li>If you want to create an installer, additionally run <code>npm run installer-&lt;platform&gt;</code> to build from source, where platform is either <code>win</code>, <code>mac</code> or <code>linux</code>.</li>
+            <li>To upgrade, run <code>git pull and redo the above steps</code> </li>
+        </ol>
+
         <h1 id="unpacking">Unpacking</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim rem pariatur ducimus earum modi dolorem quis, quas ullam non vero eum ad odio asperiores quasi dolorum itaque eveniet atque labore?</p>
+        <ol>
+            <li>In the <code>Unpack</code> tab, select your source .pak file. This should open to your Starbound directory by default. The base game assets (<code>packed.pak</code>) can be found in the <code>assets</code> folder.</li>
+            <li>Select the destiation folder next. A subfolder will be created, so if you select <code>.../Desktop</code> your file will be extracted to <code>.../Desktop/packed/</code></li>
+            <li>Now press <code>Unpack</code>. Leave PAKit open until the process is done.<br> If you wish to terminate the process at any point, simply close PAKit.</li>
+        </ol>
+
         <h1 id="packing">Packing</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim rem pariatur ducimus earum modi dolorem quis, quas ullam non vero eum ad odio asperiores quasi dolorum itaque eveniet atque labore?</p>
+        <ol>
+            <li>In the <code>Pack</code> tab, select your source assets folder.</li>
+            <li>Select the destiation .pak file next. Navigate to you want to save it to and enter a file name.</li>
+            <li>Now press <code>Pack</code>. Leave PAKit open until the process is done.<br> If you wish to terminate the process at any point, simply close PAKit.</li>
+        </ol>
         <h1 id="executables">Locating executables</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim rem pariatur ducimus earum modi dolorem quis, quas ullam non vero eum ad odio asperiores quasi dolorum itaque eveniet atque labore?</p>
-å
+        <p>If PAKit fails to locate the <code>asset_packer</code> and <code>asset_unpacker</code> executables in your source files, you will have to locate them manually in order to use PAKit.</p>
+        <ol>
+            <li>Open Steam, and go to your library. Right click on Starbound and open <code>PROPERTIES</code>.</li>
+            <li>Go the the <code>LOCAL FILES</code> tab, and press <code>BROWSE LOCAL FILES ...</code>.</li>
+            <li>Then open the executables folder (Windows: <code>win32</code>, MacOS: <code>osx</code>, Linux:<code>linux</code>).</li>
+            <li>Copy your current path, open PAKit and go to the <code>Settings </code> tab.</li>
+            <li>Press either of the <code>Select</code> buttons, and paste in the path. Select the relevant executable in this folder.</li>
+            <li>Repeat step 5 for the other executable, and then press <code>Save</code></li>
+        </ol>
     </div>
 </body>
 </html>
