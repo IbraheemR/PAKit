@@ -33,11 +33,17 @@
 }
 
 .download:hover, .download:visited:hover {
+    background-color: #333;
+
     color: white;
 }
 
 .download:visited {
     color: white;
+}
+
+.download, .download * {
+    cursor: pointer;
 }
 
 .download img {
@@ -55,6 +61,7 @@
 @media only screen and (min-width: 500px) {
     #grid {
         grid-template-columns: 200px 200px;
+        grid-template-rows: 200px 200px;
         grid-template-areas: 
         "win mac"
         "linux source";
