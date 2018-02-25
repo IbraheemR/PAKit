@@ -12,11 +12,11 @@
     "package-win": "electron-packager . PAKit --overwrite --asar --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"PAKit\" --icon=icons/techchest.ico",
     "package-mac": "electron-packager . PAKit --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds --icon=icons/techchest.icns",
     "package-linux": "electron-packager . PAKit --overwrite --asar --platform=linux --arch=x64  --prune=true --out=release-builds --icon=icons/techchest.png",
-    "build": "npm run package-win && npm run package-mac && npm run package-linux",
+    "package-all": "npm run package-win && npm run package-mac && npm run package-linux",
     "installer-win": "node installers/win/createInstaller.js",
     "installer-mac": "electron-installer-dmg release-builds/PAKit-darwin-x64/PAKit.app PAKit --overwrite --out=release-builds --icon=icons/techchest.icns",
     "installer-linux": "electron-installer-debian --src release-builds/PAKit-linux-x64/ --arch amd64 --config installers/linux/config.json",
-    "installer-all": "npm run create-winr && npm run create-dmg && npm run create-deb"
+    "installer-all": "npm run installer-win && npm run installer-dmg && npm run installer-linux"
   },
   "author": "OBAN (Ibraheem Rodrigues)",
   "license": "SEE LICENSE IN LICENSE",

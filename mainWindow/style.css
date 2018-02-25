@@ -245,6 +245,7 @@ Layout elements styling
     background: url(assets/upgrading.png) no-repeat left top; /* Load the frame strip */
     background-size: 2340px 141px; /* Scale up the frame strip */
     animation: frame-animation 1.5s steps(15) infinite; /* play the animation in steps of 15, so we see each frame*/
+    image-rendering: pixelated;
 }
 
 @keyframes frame-animation {
