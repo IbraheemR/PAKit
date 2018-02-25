@@ -1,5 +1,7 @@
+const path = require("path");
 const {ipcRenderer, shell} = require("electron");
-const {dialog} = require("electron").remote;
+const remote = require("electron").remote;
+const dialog = remote.dialog;
 
 window.$ = window.jQuery = require("jquery");
 
@@ -49,6 +51,7 @@ $(".open-file .button").click(function() {
     dialog.showOpenDialog(
         {
             title: "Open " + $(this).parent().children("#name").html(),
+            defaultPath: path.join(remote.getGlobal('basePath'), ".."),
             properties: [ 
                 "openFile", 
                 "createDirectory"

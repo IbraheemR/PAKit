@@ -119,21 +119,21 @@ const mainMenuTemplate = [
 
 
 let found = false;
-let basePath = process.env.HOME;
+global.basePath = process.env.HOME;
 
 //Get base path
 switch(process.platform) {
     case "win32":
-        basePath = "C:\\Program Files (x86)\\Steam\\SteamApps\\common\\Starbound\\win32\\";
+        global.basePath = "C:\\Program Files (x86)\\Steam\\SteamApps\\common\\Starbound\\win32\\";
         break;
     case "darwin":
-        basePath += "/Library/Application Support/Steam/steamapps/common/Starbound/osx/";
+        global.basePath += "/Library/Application Support/Steam/steamapps/common/Starbound/osx/";
         break;
     case "linux":
-        basePath += "/.steam/steam/steamspps/common/Starbound/linux";
+        global.basePath += "/.steam/steam/steamspps/common/Starbound/linux";
         break;
 }
-console.log(basePath);
+console.log(global.basePath);
 //
 // Utility function to verify executable paths
 //
@@ -145,7 +145,7 @@ function attemptExecLocation(packExec, unpackExec, noOutput, successMessage) {
         mainWindow.webContents.send("packExec", packExec);
         store.set("packExec", packExec);
     } else { // try base path
-        packExec = basePath + "asset_packer" + (process.platform == "win32" ? ".exe" : "")
+        packExec = global.basePath + "asset_packer" + (process.platform == "win32" ? ".exe" : "")
         console.log(packExec);
         if (fs.existsSync(packExec || " ")) {
             store.set("packExec", packExec);
@@ -163,7 +163,7 @@ function attemptExecLocation(packExec, unpackExec, noOutput, successMessage) {
         mainWindow.webContents.send("unpackExec", unpackExec);
         store.set("unpackExec", unpackExec);
     } else { // try base path
-        unpackExec = basePath + "asset_unpacker" + (process.platform == "win32" ? ".exe" : "")
+        unpackExec = global.basePath + "asset_unpacker" + (process.platform == "win32" ? ".exe" : "")
         if (fs.existsSync(unpackExec || " ")) {
             store.set("unpackExec", unpackExec);
             mainWindow.webContents.send("unpackExec", unpackExec);
