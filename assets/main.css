@@ -21,10 +21,8 @@ body {
     height: 100%;
 
     background-color: #111;
-}
 
-body > * {
-    width: 100%;
+    text-align: center;
 }
 
 /*
@@ -92,8 +90,10 @@ Layout elements styling
 */
 
 #title {
-    width: 100%;
-    padding: 5px 0 5px 20%;
+    margin: 0 auto;
+    padding: 5px 0;
+
+    display: inline-block;
 
     font-size: 3rem;
 }
@@ -172,10 +172,7 @@ nav a:visited {
 
 
 @media only screen and (min-width: 700px) {
-    #title {
-        width: 100%;
-        height: 20%;
-    
+    #title {    
         font-size: 4rem;
     }
     #title span {

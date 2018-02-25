@@ -1,0 +1,62 @@
+#main {
+    text-align: center;
+}
+#grid {
+    display: inline-grid;
+    grid-template-columns: 200px;
+    grid-template-rows: repeat(4, 200px);
+
+    grid-template-areas: 
+    "win"
+    "mac"
+    "linux"
+    "source";
+
+    grid-gap: 20px;
+}
+
+.download {
+    padding: 10px;
+
+    width: 200px;
+    height: 200px;
+
+    border-radius: 10px;
+
+    display: block;
+
+    background-color: #222;
+
+    font-size: 1.3rem;
+    text-decoration: none;
+    text-align: center;
+}
+
+.download:hover, .download:visited:hover {
+    color: white;
+}
+
+.download:visited {
+    color: white;
+}
+
+.download img {
+    margin: 20px auto;
+    display: block;
+
+    height: auto;
+}
+
+.download#win img {width: 86px;}
+.download#mac img {width: 64px;}
+.download#linux img {width: 80px;}
+.download#source img {width: 86px;}
+
+@media only screen and (min-width: 500px) {
+    #grid {
+        grid-template-columns: 200px 200px;
+        grid-template-areas: 
+        "win mac"
+        "linux source";
+    }
+}
