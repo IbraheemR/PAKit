@@ -9,8 +9,6 @@
     font-family: Hobo, "Courier New", Courier, monospace;
     text-rendering: geometricPrecision; /*ensure the text is properly pixelated*/
     color: white;
-
-    cursor: default;
 }
 
 body {

@@ -42,10 +42,6 @@
     color: white;
 }
 
-.download, .download * {
-    cursor: pointer;
-}
-
 .download img {
     margin: 20px auto;
     display: block;
