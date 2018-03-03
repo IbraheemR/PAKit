@@ -7,7 +7,8 @@
     "i2"
     "t2"
     "t3"
-    "i3";
+    "i3"
+    "garlic";
 }
 
 #main>* {
@@ -90,17 +91,14 @@
 
 
 @media only screen and (min-width: 700px) {
-    body {
-        overflow: hidden;
-    }
-
     #main {
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: 200px 200px auto;
         grid-template-areas: 
         "t1 t1 i1"
         "i2 t2 t2"
-        "t3 t3 i3";
+        "t3 t3 i3"
+        "garlic garlic garlic";
     }
     .image#g3 {
         text-align: left;
