@@ -1,3 +1,5 @@
+The following applies to all files contained within this repository on the 'dev' and 'master' branches, with the exception of the files 'hobo.ttf', 'outpostcargocrate.png', 'outpostcargocrateshort.png', 'techchest.png' and 'upgrading.png', (all found within the path 'mainWindow/assets') which are the intellectual propety of Chucklefish Ltd. and their respected licensors. These assets remain and should remain unmodified from their original form.
+
 Copyright 2018 Ibraheem Rodrigues (aka OBAN, OBANx)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
