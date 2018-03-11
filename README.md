@@ -1,1 +1,1 @@
-# [PAKit's Github pages site](https://OBANx.github.io/PAKit/)
+# [PAKit's Github pages site](http://pakit.cf/)
