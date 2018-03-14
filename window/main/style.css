@@ -1,0 +1,112 @@
+/*
+
+Layout elements styling
+
+*/
+
+#title {
+    width: 100vw;
+    height: 13vh;
+
+    padding: 5px 25%;
+    -webkit-app-region: drag; /* Allow the user to drag the window when clicking this location, on frameless macOS window */
+
+    font-size: 3rem;
+    line-height: 13vh;
+}
+
+#title img {
+    width: 48px;
+    height: auto;
+
+    position: relative;
+    top: 3px;
+}
+
+#title span {
+    font-size: 1rem;
+}
+
+
+#tabs {
+    width: 100vw;
+    height: 10vh;
+}
+
+.tab {
+    width: 25%;
+    height: 100%;
+
+    float: left;
+
+    text-align: center;
+    line-height: 10vh;
+
+    cursor: pointer;
+
+    border: 1px solid #222;
+}
+
+.tab:hover, .tab.active {
+    border-bottom: 3px solid #333;
+}
+
+
+#panels {
+    height: 60vh;
+}
+
+.panel {
+    width: 100%;
+    height: 100%;
+
+    padding: 10px 20px;
+}
+
+.panel#settings #info {
+    padding-top: 5px; 
+    clear: both;
+}
+
+
+#images>* {
+    z-index: 100;
+    position: fixed;
+}
+
+#images #crateshort {
+    bottom: 0;
+    right: 0;
+}
+
+#images #crate {
+    bottom: 48px;
+    right: 18px;
+}
+
+#images #pak {
+    z-index: 150;
+    bottom: 63px;
+    right: 36px;
+}
+
+#images #penguins {
+    z-index: 150;
+    bottom: 0;
+    right: 54px;
+}
+
+/* Code below is from this wonderful codepen: https://codepen.io/simurai/pen/tukwj */
+#frame {
+    width: 156px; /* Dimentions of each frame*/
+    height: 141px;
+    background: url(../assets/upgrading.png) no-repeat left top; /* Load the frame strip */
+    background-size: 2340px 141px; /* Scale up the frame strip */
+    animation: frame-animation 1.5s steps(15) infinite; /* play the animation in steps of 15, so we see each frame*/
+    image-rendering: pixelated;
+}
+
+@keyframes frame-animation {
+    0% { background-position: 0px 0; }
+    100% { background-position: -2340px 0; } /* By the end of the animation shift all frames through the visable region*/
+}
