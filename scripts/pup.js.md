@@ -4,10 +4,10 @@
 To be used as an argument to functions
 
 ## Constant: `UNPACK` = `'unpack'`  
-To be used as `type` argument to functions
+To be used as `mode` argument to functions
 
-## savePath(type, [p])
-- `type <String>` const `PACK` or const `UNPACK`  
+## savePath(mode, [p])
+- `mode <String>` const `PACK` or const `UNPACK`  
 - `p <String>`
 - returns `<Object>`:
   - `path <String>`: saved path  
@@ -17,15 +17,15 @@ To be used as `type` argument to functions
     - `1`: no path given/configured, using default
     - `0`: cannot find default!
 
-Given type and an optional path p (else attempt to load from disk), verify the path and store to disk if the path is valid.
+Given mode and an optional path p (else attempt to load from disk), verify the path and store to disk if the path is valid.
 
 
 
-## resetPath(type)
-- `type` `<String>`: const `PACK` or const `UNPACK`  
+## resetPath(mode)
+- `mode` `<String>`: const `PACK` or const `UNPACK`  
 - returns `<Object>` (see `savePath`)  
 
-Wrapper for `savePath(type, {default path})`
+Wrapper for `savePath(mode, {default path})`
 
 
 
@@ -45,8 +45,8 @@ Wrapper for `savePath(type, {default path})`
     - `0`: cannot find default!
 
 
-## doPUP(type, pathIn, pathOut, outputCallback)
-- `type <String>`: const `PACK` or const `UNPACK`  
+## doPUP(mode, pathIn, pathOut, outputCallback)
+- `mode <String>`: const `PACK` or const `UNPACK`  
 - `pathIn <String>`: the path to the file or folder being input  
 - `pathOut <String>`: the path to the file or folder being output
 

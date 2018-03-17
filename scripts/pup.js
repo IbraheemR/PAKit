@@ -37,50 +37,50 @@ switch(process.platform) {
         break;
 }
 
-function savePath(type, p) {
+function savePath(mode, p) {
   let pValid = (typeof p) !== 'undefined'
-  p = pValid ? p : store.get(`${type}Exec`);
+  p = pValid ? p : store.get(`${mode}Exec`);
 
   if (p) {
 
     if (fs.existsSync(p)) {// User path good
       if (pValid) {
-        store.set(`${type}Exec`, p); // Store the new user path if valid
+        store.set(`${mode}Exec`, p); // Store the new user path if valid
       }
 
-      status[type] = 3;
+      status[mode] = 3;
     } else {
-      p = path.join(basePath, `asset_${type}er${process.platform == "win32" ? ".exe" : ""}`);
+      p = path.join(basePath, `asset_${mode}er${process.platform == "win32" ? ".exe" : ""}`);
 
       if (fs.existsSync(p)) {// Switched to default
-        status[type] = 2; 
+        status[mode] = 2; 
 
       } else {// Default not found
-        status[type] = 0; 
+        status[mode] = 0; 
       }
     }
 
   } else {
 
-    p = path.join(basePath, `asset_${type}er${process.platform == "win32" ? ".exe" : ""}`);
+    p = path.join(basePath, `asset_${mode}er${process.platform == "win32" ? ".exe" : ""}`);
 
     if (fs.existsSync(p)) {// Using default
-      status[type] = 1; 
+      status[mode] = 1; 
 
     } else {// Default not found
-      status[type] = 0; 
+      status[mode] = 0; 
     }
   }
 
-  paths[type] = p;
+  paths[mode] = p;
   return {
-    path:paths[type],
-     status:status[type]
+    path:paths[mode],
+     status:status[mode]
     };
 }
 
-function resetPath(type) {
-  savePath(type, path.join(basePath, `asset_${type}er${process.platform == "win32" ? ".exe" : ""}`));
+function resetPath(mode) {
+  savePath(mode, path.join(basePath, `asset_${mode}er${process.platform == "win32" ? ".exe" : ""}`));
 }
 
 
@@ -88,8 +88,8 @@ function resetPath(type) {
 * (Un)Packing functions
 */
 
-function doPUP(type, pathIn, pathOut) {
-  return execFile(paths[type], [pathIn, pathOut]);
+function doPUP(mode, pathIn, pathOut) {
+  return execFile(paths[mode], [pathIn, pathOut]);
 }
 
 /*
