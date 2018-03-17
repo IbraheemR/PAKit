@@ -13,6 +13,10 @@ const path = require("path");
 const Store = require('electron-store');
 const store = new Store();
 
+/*
+Path handling
+*/
+
 let paths = {};
 let status = {};
 
@@ -39,21 +43,20 @@ function savePath(type, p) {
 
   if (p) {
 
-    if (fs.existsSync(p)) {
+    if (fs.existsSync(p)) {// User path good
       if (pValid) {
         store.set(`${type}Exec`, p) // Store the new user path if valid
       }
 
-      return [p, 3]; // User path good
-
+      status[type] = 3;
     } else {
       p = path.join(basePath, `asset_${type}er${process.platform == "win32" ? ".exe" : ""}`);
 
-      if (fs.existsSync(p)) {
-        return [p, 2]; // Switched to default
+      if (fs.existsSync(p)) {// Switched to default
+        status[type] = 2; 
 
-      } else {
-        return ["", 0]; // Default not found
+      } else {// Default not found
+        status[type] = 0; 
       }
     }
 
@@ -61,22 +64,45 @@ function savePath(type, p) {
 
     p = path.join(basePath, `asset_${type}er${process.platform == "win32" ? ".exe" : ""}`);
 
-    if (fs.existsSync(p)) {
-      return [p, 1]; // Using default
+    if (fs.existsSync(p)) {// Using default
+      status[type] = 1; 
 
-    } else {
-      return ["", 0]; // Default not found
+    } else {// Default not found
+      status[type] = 0; 
     }
   }
+
+  paths[type] = p;
+  return {
+    path:paths[type],
+     status:status[type]
+    };
 }
 
 function resetPath(type) {
   savePath(type, path.join(basePath, `asset_${type}er${process.platform == "win32" ? ".exe" : ""}`));
 }
 
+
+/*
+* (Un)Packing functions
+*/
+
+doPUP(type, pathIn, pathOut, outputCallback) {
+  
+}
+
+/*
+* INIT
+*/
+savePath(PACK);
+savePath(UNPACK);
+
 module.exports = {
-  pack: savePath(PACK),
-  unpack: savePath(UNPACK),
+  PACK: PACK,
+  UNPACK: UNPACK,
+  paths: paths,
+  status: status,
   savePath: savePath,
   resetPath: resetPath
 }
