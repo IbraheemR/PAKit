@@ -45,7 +45,7 @@ function savePath(type, p) {
 
     if (fs.existsSync(p)) {// User path good
       if (pValid) {
-        store.set(`${type}Exec`, p) // Store the new user path if valid
+        store.set(`${type}Exec`, p); // Store the new user path if valid
       }
 
       status[type] = 3;
@@ -88,8 +88,8 @@ function resetPath(type) {
 * (Un)Packing functions
 */
 
-doPUP(type, pathIn, pathOut, outputCallback) {
-  
+function doPUP(type, pathIn, pathOut) {
+  return execFile(paths[type], [pathIn, pathOut]);
 }
 
 /*
@@ -104,5 +104,6 @@ module.exports = {
   paths: paths,
   status: status,
   savePath: savePath,
-  resetPath: resetPath
+  resetPath: resetPath,
+  odPUP: doPUP
 }
