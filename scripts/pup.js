@@ -9,6 +9,7 @@
 
 const execFile = require('child_process').execFile;
 const fs = require("fs");
+const {app} = require("electron");
 const path = require("path");
 const Store = require('electron-store');
 const store = new Store();
@@ -75,12 +76,12 @@ function savePath(mode, p) {
   paths[mode] = p;
   return {
     path:paths[mode],
-     status:status[mode]
+    status:status[mode]
     };
 }
 
 function resetPath(mode) {
-  savePath(mode, path.join(basePath, `asset_${mode}er${process.platform == "win32" ? ".exe" : ""}`));
+  return savePath(mode, path.join(basePath, `asset_${mode}er${process.platform == "win32" ? ".exe" : ""}`));
 }
 
 
@@ -88,22 +89,17 @@ function resetPath(mode) {
 * (Un)Packing functions
 */
 
-function doPUP(mode, pathIn, pathOut) {
-  return execFile(paths[mode], [pathIn, pathOut]);
+function doPUP(mode, pathIn, pathOut, callback) {
+  return execFile(paths[mode], [pathIn, pathOut], callback);
 }
-
-/*
-* INIT
-*/
-savePath(PACK);
-savePath(UNPACK);
 
 module.exports = {
   PACK: PACK,
   UNPACK: UNPACK,
+  basePath: basePath,
   paths: paths,
   status: status,
   savePath: savePath,
   resetPath: resetPath,
-  odPUP: doPUP
+  doPUP: doPUP
 }

@@ -6,7 +6,7 @@ const path = require("path");
 const {app, dialog, shell} = electron;
 
 //Get current release version
-let versionCurrent =  require("../package.json")["version"];
+let versionCurrent =  require("../package.json").version;
 
 //Get latest version
 request({
@@ -44,3 +44,7 @@ request({
     console.warn(error);
   }
 });
+
+module.exports = {
+  versionString: require("../package.json").version_string
+}

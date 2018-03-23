@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>PAKit</title>
 
-    <link rel="stylesheet" href="../assets/main.css">
+    <link rel="stylesheet" href="../assets/global.css">
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -32,6 +32,7 @@
             </div>
             <div id="form-buttons">
                 <span class="button" id="submit">Pack</span>
+                <span class="button disabled" id="kill">Stop</span>
             </div>
 
         </form>
@@ -52,6 +53,7 @@
             </div>
             <div id="form-buttons">
                 <span class="button" id="submit">Unpack</span>
+                <span class="button disabled" id="kill">Stop</span>
             </div>
 
         </form>
@@ -77,11 +79,13 @@
 
         </form>
         <div id="about" class="panel">
-
-            PAKit, a graphical Starbound .pak manipulation tool tahts puts the penguins to work.<br><br>
-            <a href="http://pakit.cf">Website</a><br>
+            <span id="version"></span><br>
             <br>
-            It works by locating the asset_packer and asset_unpacker executables in your game files (or you can manually select them if they are not found).<br>
+            PAKit, the graphical tool for .pak files that puts the penguins to work.<br>
+            <br>
+            For more info: <a href="http://pakit.cf">pakit.cf</a><br>
+            <br>
+            PAKit locates the asset_packer and asset_unpacker executables in your game files (or you can manually select them if they are not found). Your internet connection will be used to check for updates.<br>
             <br>
             Could you spare a clove or two of <a href="https://garlicoin.io/">Garlic</a>?<br>
             GacWBGqzawm61FZdbTu2EbSSMKRC8i6QnZ
@@ -101,7 +105,7 @@
         </div>
     </div>
 
-
+    <script src="../assets/global.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

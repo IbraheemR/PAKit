@@ -68,6 +68,14 @@ Layout elements styling
     clear: both;
 }
 
+#output {
+    width: 77vw; /* Extend till we reach the penguins */
+    height: auto; /* This section can take up the rest of the screen */
+
+    padding: 10px 40px 10px 10px; /* 70px ensures the text does not go behind the penguins */
+    border-top: 1px solid #333;
+}
+
 
 #images>* {
     z-index: 100;
@@ -110,3 +118,5 @@ Layout elements styling
     0% { background-position: 0px 0; }
     100% { background-position: -2340px 0; } /* By the end of the animation shift all frames through the visable region*/
 }
+
+

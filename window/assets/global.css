@@ -72,7 +72,7 @@ img {
 }
 
 .button.disabled {
-  background-color: #111;
+  background-color: #222;
   cursor: not-allowed;
 }
 
@@ -124,12 +124,6 @@ img {
 
   word-wrap: break-word;
 }
-
-/*
-
-Output section styling
-
-*/
 
 #output {
 

@@ -1,6 +1,7 @@
 {
   "name": "pakit",
   "version": "1.0.0",
+  "version_string": "v1.1 Automated Adelie",
   "description": "Pack and unpack starbound's .pak files",
   "main": "index.js",
   "repository": {
