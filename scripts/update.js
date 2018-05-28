@@ -10,7 +10,7 @@ let versionCurrent =  require("../package.json").version;
 
 //Get latest version
 request({
-  url: 'https://api.github.com/repos/OBANx/PAKit/releases/latest',
+  url: 'https://api.github.com/repos/IbraheemR/PAKit/releases/latest',
   headers: {
     'User-Agent': 'pakit-app-updater'
   }
