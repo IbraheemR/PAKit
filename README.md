@@ -1,1 +1,1 @@
-# [PAKit's Github pages site](http://pakit.cf/)
+# [PAKit's Github pages site](https://pakit.cf/)
