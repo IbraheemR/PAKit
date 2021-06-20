@@ -57,7 +57,7 @@ a:visited {
 }
 
 div, img {
-    image-rendering: pixelated; /* Keep pixel art sharp */
+    image-rendering: crisp-edges; /* Keep pixel art sharp */
 }
 
 a.nolink {
