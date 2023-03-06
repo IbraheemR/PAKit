@@ -130,7 +130,7 @@ switch(process.platform) {
         global.basePath += "/Library/Application Support/Steam/steamapps/common/Starbound/osx/";
         break;
     case "linux":
-        global.basePath += "/.steam/steam/steamspps/common/Starbound/linux";
+        global.basePath += "/.steam/steam/steamapps/common/Starbound/linux";
         break;
 }
 console.log(global.basePath);
